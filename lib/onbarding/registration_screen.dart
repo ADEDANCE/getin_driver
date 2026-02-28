@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getin_driver/onbarding/document_info.dart';
 import 'package:getin_driver/onbarding/personal_info.dart';
 import 'package:getin_driver/onbarding/vehicle_info.dart';
-import 'package:getin_driver/reusable_sidget/button_widget.dart';
+import 'package:getin_driver/reusable_widget/button_widget.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});

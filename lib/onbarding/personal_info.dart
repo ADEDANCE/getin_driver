@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:getin_driver/reusable_sidget/textfied_widget.dart';
+import 'package:getin_driver/reusable_widget/textfied_widget.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({super.key});
