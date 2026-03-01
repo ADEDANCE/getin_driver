@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:getin_driver/home/home_screen.dart';
 import 'package:getin_driver/onbarding/signup_screen.dart';
-import 'package:getin_driver/reusable_sidget/button_widget.dart';
-import 'package:getin_driver/reusable_sidget/textfied_widget.dart';
+import 'package:getin_driver/reusable_widget/button_widget.dart';
+import 'package:getin_driver/reusable_widget/textfied_widget.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -86,7 +87,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ),
               ButtonWidget(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => HomeScreen()),
+                  );
+                },
                 backgroundColor: Color(0xFF3D4CF5),
                 height: 65.h,
                 width: double.infinity,
