@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getin_driver/onbarding/registration_screen.dart';
-import 'package:getin_driver/reusable_sidget/button_widget.dart';
-import 'package:getin_driver/reusable_sidget/textfied_widget.dart';
+import 'package:getin_driver/reusable_widget/button_widget.dart';
+import 'package:getin_driver/reusable_widget/textfied_widget.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
