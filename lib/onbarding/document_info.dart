@@ -1,6 +1,7 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:file_picker/file_picker.dart';
 
 class DocumentInfo extends StatefulWidget {
   const DocumentInfo({super.key});
@@ -10,6 +11,27 @@ class DocumentInfo extends StatefulWidget {
 }
 
 class _DocumentInfoState extends State<DocumentInfo> {
+  // to store the document
+  String? driversLicense;
+  String? vehicleRegistration;
+  String? selfieWithId;
+
+  Future<void> pickFile(String type) async {
+    final result = await FilePicker.platform.pickFiles();
+
+    if (result != null) {
+      setState(() {
+        if (type == "license") {
+          driversLicense = result.files.single.name;
+        } else if (type == "vehicle") {
+          vehicleRegistration = result.files.single.name;
+        } else if (type == "selfie") {
+          selfieWithId = result.files.single.name;
+        }
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -46,7 +68,7 @@ class _DocumentInfoState extends State<DocumentInfo> {
         ),
         SizedBox(height: 10),
         GestureDetector(
-          onTap: () {},
+          onTap: () => pickFile("license"),
           child: DottedBorder(
             options: RoundedRectDottedBorderOptions(
               radius: Radius.circular(16),
@@ -63,9 +85,14 @@ class _DocumentInfoState extends State<DocumentInfo> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.note_add_outlined),
+                  Icon(
+                    driversLicense == null
+                        ? Icons.note_add_outlined
+                        : Icons.check_circle,
+                    color: driversLicense == null ? Colors.black : Colors.green,
+                  ),
                   Text(
-                    "Upload driver's license",
+                    driversLicense ?? "Upload driver's license",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.sp,
@@ -93,7 +120,7 @@ class _DocumentInfoState extends State<DocumentInfo> {
         ),
         SizedBox(height: 10),
         GestureDetector(
-          onTap: () {},
+          onTap: () => pickFile("vehicle"),
           child: DottedBorder(
             options: RoundedRectDottedBorderOptions(
               radius: Radius.circular(16),
@@ -110,9 +137,16 @@ class _DocumentInfoState extends State<DocumentInfo> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.note_add_outlined),
+                  Icon(
+                    vehicleRegistration == null
+                        ? Icons.note_add_outlined
+                        : Icons.check_circle,
+                    color: vehicleRegistration == null
+                        ? Colors.black
+                        : Colors.green,
+                  ),
                   Text(
-                    "Upload Vehicle Registration",
+                    vehicleRegistration ?? "Upload Vehicle Registration",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.sp,
@@ -140,7 +174,7 @@ class _DocumentInfoState extends State<DocumentInfo> {
         ),
         SizedBox(height: 10),
         GestureDetector(
-          onTap: () {},
+          onTap: () => pickFile("selfie"),
           child: DottedBorder(
             options: RoundedRectDottedBorderOptions(
               radius: Radius.circular(16),
@@ -157,9 +191,14 @@ class _DocumentInfoState extends State<DocumentInfo> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Icon(Icons.camera_alt_outlined),
+                  Icon(
+                    selfieWithId == null
+                        ? Icons.camera_alt_outlined
+                        : Icons.check_circle,
+                    color: selfieWithId == null ? Colors.black : Colors.green,
+                  ),
                   Text(
-                    "Upload selfie with ID",
+                    selfieWithId ?? "Upload selfie with ID",
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 20.sp,
