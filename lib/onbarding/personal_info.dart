@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getin_driver/reusable_widget/textfied_widget.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class PersonalInfo extends StatefulWidget {
   const PersonalInfo({super.key});
@@ -12,6 +16,27 @@ class PersonalInfo extends StatefulWidget {
 class _PersonalInfoState extends State<PersonalInfo> {
   final TextEditingController _namecontroller = TextEditingController();
   final TextEditingController _phonecontroller = TextEditingController();
+  final ImagePicker _picker = ImagePicker();
+  XFile? selectedImage; // to Store the Image
+
+  Future<void> pickImage() async {
+    // Request permission first
+    final status = await Permission.photos
+        .request(); // or Permission.storage for older Android
+    if (!status.isGranted) return; // Stop if permission denied
+
+    final XFile? image = await _picker.pickImage(
+      //Open Gallery
+      source: ImageSource.gallery,
+    );
+    if (image != null) {
+      //save and Update UI
+      setState(() {
+        selectedImage = image;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -36,17 +61,33 @@ class _PersonalInfoState extends State<PersonalInfo> {
         SizedBox(height: 10),
         Stack(
           children: [
-            Icon(Icons.person_2_outlined, size: 120),
+            selectedImage != null
+                ? CircleAvatar(
+                    radius: 60,
+                    backgroundImage: FileImage(File(selectedImage!.path)),
+                  )
+                : Icon(Icons.person_2_outlined, size: 130),
             Positioned(
-              top: 80,
-              left: 80,
-              child: Container(
-                padding: EdgeInsets.all(5),
-                decoration: BoxDecoration(
-                  color: Color(0xFF3D4CF5),
-                  borderRadius: BorderRadius.circular(30),
+              top: 70,
+              left: 75,
+              child: SizedBox(
+                width: 40,
+                height: 40,
+                child: Container(
+                  // padding: EdgeInsets.all(5),
+                  decoration: BoxDecoration(
+                    color: Color(0xFF3D4CF5),
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  child: IconButton(
+                    onPressed: pickImage,
+                    icon: Icon(
+                      Icons.camera_alt_outlined,
+                      color: Colors.white,
+                      size: 20,
+                    ),
+                  ),
                 ),
-                child: Icon(Icons.camera_alt_outlined, color: Colors.white),
               ),
             ),
           ],
