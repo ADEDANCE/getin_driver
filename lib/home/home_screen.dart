@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,33 +17,130 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       key: _scaffoldKey, // attach key to scaffold
       drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
+        child: Column(
           children: [
-            DrawerHeader(
-              decoration: const BoxDecoration(color: Color(0xFF3D4CF5)),
-              child: const Text(
-                "Menu",
-                style: TextStyle(color: Colors.white, fontSize: 20),
+            //  TOP CONTENT
+            Expanded(
+              child: ListView(
+                padding: EdgeInsets.zero,
+                children: [
+                  DrawerHeader(
+                    decoration: const BoxDecoration(
+                      color: Color.fromRGBO(61, 76, 245, 1),
+                    ),
+                    child: Stack(
+                      children: [
+                        //  Cancel Button
+                        Positioned(
+                          top: -20,
+                          left: 0,
+                          child: IconButton(
+                            icon: Icon(Icons.close, color: Colors.white),
+                            onPressed: () {
+                              Navigator.pop(context); // close drawer
+                            },
+                          ),
+                        ),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            CircleAvatar(
+                              radius: 30,
+                              backgroundColor: Colors.white,
+                              child: Text(
+                                "DR",
+                                style: TextStyle(
+                                  color: Color(0xFF3D4CF5),
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ),
+                            SizedBox(width: 10),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Driver Name",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Row(
+                                  children: [
+                                    Icon(Icons.star, color: Colors.amber),
+                                    SizedBox(width: 8.w),
+                                    Text(
+                                      " 4.9 Rating",
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 18,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.person),
+                    title: const Text("Profile"),
+                    onTap: () {},
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.car_rental_outlined),
+                    title: const Text("My Rides"),
+                    onTap: () {
+                      Navigator.pop(context); // close drawer
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.attach_money),
+                    title: const Text("Earnings"),
+                    onTap: () {
+                      Navigator.pop(context); // close drawer
+                    },
+                  ),
+                  ListTile(
+                    leading: const Icon(Icons.settings),
+                    title: const Text("Settings"),
+                    onTap: () {},
+                  ),
+
+                  ListTile(
+                    leading: const Icon(Icons.call),
+                    title: const Text("Support"),
+                    onTap: () {},
+                  ),
+                ],
               ),
             ),
-            ListTile(
-              leading: const Icon(Icons.home),
-              title: const Text("Home"),
-              onTap: () {
-                Navigator.pop(context); // close drawer
-              },
-            ),
-            ListTile(
-              leading: const Icon(Icons.person),
-              title: const Text("Profile"),
-              onTap: () {},
-            ),
-
-            ListTile(
-              leading: const Icon(Icons.settings),
-              title: const Text("Settings"),
-              onTap: () {},
+            //  FOOTER SECTION
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              decoration: const BoxDecoration(
+                color: Color(0xFFFFE5E5), // light red background
+              ),
+              child: ListTile(
+                leading: const Icon(Icons.delete_outline, color: Colors.red),
+                title: const Text(
+                  "Delete Account",
+                  style: TextStyle(
+                    color: Colors.red,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                onTap: () {
+                  // delete logic
+                },
+              ),
             ),
           ],
         ),
