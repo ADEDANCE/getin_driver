@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:getin_driver/home/earnings_screen.dart';
+import 'package:getin_driver/home/profile_screen.dart';
+import 'package:getin_driver/home/ride_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -91,20 +94,31 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: const Icon(Icons.person),
                     title: const Text("Profile"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => ProfileScreen()),
+                      );
+                    },
                   ),
                   ListTile(
                     leading: const Icon(Icons.car_rental_outlined),
                     title: const Text("My Rides"),
                     onTap: () {
-                      Navigator.pop(context); // close drawer
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => RideScreen()),
+                      );
                     },
                   ),
                   ListTile(
                     leading: const Icon(Icons.attach_money),
                     title: const Text("Earnings"),
                     onTap: () {
-                      Navigator.pop(context); // close drawer
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => EarningsScreeng()),
+                      );
                     },
                   ),
                   ListTile(
