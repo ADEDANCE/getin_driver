@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:getin_driver/home/earnings_screen.dart';
 import 'package:getin_driver/home/profile_screen.dart';
 import 'package:getin_driver/home/ride_screen.dart';
+import 'package:getin_driver/home/setting_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -124,7 +125,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   ListTile(
                     leading: const Icon(Icons.settings),
                     title: const Text("Settings"),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => SettingScreen()),
+                      );
+                    },
                   ),
 
                   ListTile(
